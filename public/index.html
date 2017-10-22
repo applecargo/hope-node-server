@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- dependencies -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/Tone.min.js"></script>
+    <script type="text/javascript" src="js/socket.io.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/loading-animation.css"/>
+    <!-- js code -->
+    <script type="text/javascript" src="js/ui.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </head>
+
+  <body class="bg-light-blue min-h-100 h-auto">
+
+    <!-- top sticky overlay-ed flasher -->
+    <div class="flasher fixed top-0 left-0 vh-100 w-100 bg-white z-max" style="display:none;pointer-events:none"></div>
+
+    <!-- full page layout -->
+    <div class="vh-100 w-100 absolute top-0 left-0 bg-light-blue">
+      <div class="cf w-100 top-0">
+	
+	<!-- top sticky system status header -->
+	<div class="absolute top-0 right-0 pt2 pr2">
+	  <input type="checkbox" class="netstat input-reset dib br-100 w2 h2 ba bw2 b--near-black" style="pointer-events:none" value="0"/>
+	</div>
+
+	<!-- welcome page -->
+	<div class="fl w-100 bg-gray" id="page-welcome">
+	  <div class="fl w-100 pt3">
+	    <div class="tc">
+	      <div class="dib w-40">
+		<img src="imgs/litmusphone.png" />
+	      </div>
+	    </div>
+	  </div>
+	  <div class="fl w-100">
+	    <div class="fl w-100 tc pv3 lh-copy f4 fw7 black">
+	      의문형의 희망<br>Looking for the hope?
+	    </div>
+	  </div>
+	  <div class="page-next fl w-100 bg-lime pv2">
+	    <div class="tc">
+	      <div class="dib w-30">
+		<svg class="fill-navy" width="100%" height="100%" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg">
+		  <path d="M1540 862q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+		</svg>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- loading -->
+	<div class="dt vh-100 w-100 absolute top-0 left-0 animationStripes" id="page-loading" style="display:none">
+	  <div class="dtc v-mid tc white">
+	    <h1 class="f3 f1-ns">
+	      Loading..........!?
+	    </h1>
+	  </div>
+	</div>
+
+	<!-- seat number check page -->
+	<div class="ui-page fl w-100 bg-gray" id="page-seatsel" style="display:none">
+	  <div class="fl w-100 tc pv3 lh-copy f5 fw7 black">
+	    번호를 골라주세요.<br>Please select your #!
+	  </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-1 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">1</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-2 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">2</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-3 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">3</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-4 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">4</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-5 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">5</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-6 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">6</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-7 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">7</div>
+	    </div>
+          </div>
+	  <div class="fl w-50">
+            <div class="tc pv3">
+	      <div class="seat-8 dib br-100 w3 h3 bg-green ba bw2 b--white fw7 f3 white">8</div>
+	    </div>
+          </div>
+        </div>
+
+	<!-- sound output check page -->
+	<div class="page fl w-100 bg-near-black" id="page-checklist" style="display:none">
+	  <div class="fl w-100 center ph4">
+	    <div class="fl w-100">
+	      <div class="tc pv3 lh-copy f3 fw6">
+		<span class="hot-pink f4 fw7 b">체크 리스트</span>
+	      </div>
+	    </div>
+	    <div class="fl w-100">
+	      <div class="tc pv3 lh-copy f3 fw6">
+		<span class="white f3 fw7 b">자리 번호:</span><span class="show-seatsel white f3 fw7 b"></span><br>
+		<span class="red f3 fw7 b">진동 해제!!</span><br>
+		<span class="yellow f3 fw7 b">스피커온!!</span><br>
+		<span class="lime f3 fw7 b">WIFI/LTE 연결!!</span><br>
+		<span class="blue f3 fw7 b">사운드 체크!! (버튼)</span>
+	      </div>
+	    </div>
+	    <div class="fl w-100">
+	      <div class="tc">
+		<div class="dib w-50 pb3">
+	          <div class="ui-clap dib br-100 w3 h3 bg-blue ba bw2 b--yellow"></div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

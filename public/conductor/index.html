@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- dependencies -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/Tone.min.js"></script>
+    <script type="text/javascript" src="js/socket.io.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/loading-animation.css"/>
+    <!-- js code -->
+    <script type="text/javascript" src="js/ui.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </head>
+
+  <body class="bg-light-blue min-h-100 h-auto">
+
+    <!-- top sticky overlay-ed flasher -->
+    <div class="flasher fixed top-0 left-0 vh-100 w-100 bg-white z-max" style="display:none;pointer-events:none"></div>
+
+    <!-- full page layout -->
+    <div class="vh-100 w-100 absolute top-0 left-0 bg-light-blue">
+      <div class="cf w-100 top-0">
+	
+	<!-- top sticky system status header -->
+	<div class="absolute top-0 right-0 pt2 pr2">
+	  <input type="checkbox" class="netstat input-reset dib br-100 w2 h2 ba bw2 b--near-black" style="pointer-events:none" value="0"/>
+	</div>
+
+	<!-- conductor page -->
+	<div class="ui-page fl w-100 bg-gray" id="page-conductor">
+	  <div class="fl w-100">
+	    <div class="tc">
+	      <div class="dib w3">
+		<img src="imgs/litmusphone.png" />
+	      </div>
+	    </div>
+	  </div>
+	  <div class="fl w-100 tc pv3 lh-copy f5 fw7 black">
+	    의문형의 희망<br>Looking for the hope? (conductor)
+	  </div>
+        </div>
+
+        <!-- clap sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a clap!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="clap-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- marimba sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a marimba!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="marimba-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- dama sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a dama!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="dama-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="dama-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="dama-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="dama-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="dama-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- tiger sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a tiger!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="tiger-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="tiger-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tiger-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="tiger-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="tiger-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- bee sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a bee!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bee-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bee-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="bee-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bee-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bee-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- bell sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a bell!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bell-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bell-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="bell-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bell-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bell-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- bird sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a bird!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bird-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bird-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="bird-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bird-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="bird-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- m01 sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a m01!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="m01-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="m01-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="m01-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="m01-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="m01-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- hum01 sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a hum01!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum01-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum01-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="hum01-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum01-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum01-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- hum02 sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a hum02!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum02-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum02-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="hum02-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum02-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="hum02-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- wind sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a wind!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="wind-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="wind-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="wind-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="wind-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="wind-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+        <!-- cricket sound -->
+	<div class="fl w-100 bg-navy">
+	  <div class="fl w-40 tc pv3 lh-copy f5 fw7 white">
+	    a cricket!
+	  </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="cricket-start dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="cricket-stop dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="cricket-cnt tc pv3 f3 fw7 white">
+              0
+            </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="cricket-faster dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+	  <div class="fl w-10">
+            <div class="tc pv3">
+	      <div class="cricket-slower dib br-100 w2 h2 ba bw2 b--white f3 black"></div>
+	    </div>
+          </div>
+        </div>
+	
+      </div><!-- full page end -->
+    </div>
+    
+  </body>
+</html>
