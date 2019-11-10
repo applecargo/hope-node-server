@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "hope.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.15.3",
+    "fs": "0.0.1-security",
+    "http-proxy": "^1.16.2",
+    "https": "^1.0.0",
+    "osc": "^2.2.0",
+    "socket.io": "^2.0.3",
+    "socket.io-stream": "^0.9.1",
+    "wav": "^1.0.1"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,17 +27,5 @@
   "bugs": {
     "url": "https://github.com/applecargo/hope-node-server/issues"
   },
-  "homepage": "https://github.com/applecargo/hope-node-server#readme",
-  "dependencies": {
-    "binaryjs": "^0.2.1",
-    "express": "^4.15.3",
-    "fs": "0.0.1-security",
-    "http-proxy": "^1.16.2",
-    "https": "^1.0.0",
-    "osc": "^2.2.0",
-    "socket.io": "^2.0.3",
-    "socket.io-stream": "^0.9.1",
-    "sqlite3": "^3.1.8",
-    "wav": "^1.0.1"
-  }
+  "homepage": "https://github.com/applecargo/hope-node-server#readme"
 }

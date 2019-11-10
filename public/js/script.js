@@ -24,7 +24,7 @@ $( document ).ready(function() {
   //
   $(".page-next").click(function() { pagin.next(); });
   $(".page-prev").click(function() { pagin.prev(); });
-  
+
   ////seat selector
   var seat1 = new Btn($(".seat-1"), 'bg-yellow', 'bg-hot-pink', 300, function () { g_seat_no = 1; pagin.next(); });
   var seat2 = new Btn($(".seat-2"), 'bg-yellow', 'bg-hot-pink', 300, function () { g_seat_no = 2; pagin.next(); });
@@ -34,7 +34,7 @@ $( document ).ready(function() {
   var seat6 = new Btn($(".seat-6"), 'bg-yellow', 'bg-hot-pink', 300, function () { g_seat_no = 6; pagin.next(); });
   var seat7 = new Btn($(".seat-7"), 'bg-yellow', 'bg-hot-pink', 300, function () { g_seat_no = 7; pagin.next(); });
   var seat8 = new Btn($(".seat-8"), 'bg-yellow', 'bg-hot-pink', 300, function () { g_seat_no = 8; pagin.next(); });
-  
+
   ////audio buffer loader
   //START >>> audioloader
   var clap;
@@ -135,7 +135,7 @@ $( document ).ready(function() {
   // <<< END audioloader
 
   ////local sounds (ui-triggered)
-  
+
   //sndcheck audio
   $('.ui-clap').click(function() {
     clap.start();
@@ -148,7 +148,7 @@ $( document ).ready(function() {
   var netstat;
   function setup_socket() {
     //network
-    socket = io('http://52.79.203.62:5999'); //temporal ip - amazon aws ec2 server
+    socket = io('http://13.125.85.223:5999'); //temporal ip - amazon aws ec2 server
     netstat = new Tgl($(".netstat")[0], 'bg-white', 'bg-near-black', null, null);
     socket.on('connect', function() {
       netstat.set();
@@ -156,7 +156,7 @@ $( document ).ready(function() {
         netstat.clear();
       });
     });
-    
+
     socket.on('sound', function(msg) {
       switch(msg.name) {
       case "clap":
